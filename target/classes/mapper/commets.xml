@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.CommentsDao">
+
+<resultMap id="CommentsDtoMap" type="com.example.demo.dto.CommentsDto$CommentsRead">
+    <result property="cono" column="CONO"/>
+    <result property="commentsContent" column="COMMENTS_CONTENT"/>
+    <result property="commentsCreatedate" column="COMMENTS_CREATEDATE"/>
+    <result property="nickname" column="NICKNAME"/>
+    <result property="pno" column="PNO"/>
+</resultMap>
+
+
+<select id="getCommentsWithNickname" resultMap="CommentsDtoMap">
+    SELECT c.CONO, c.COMMENTS_CONTENT, c.COMMENTS_CREATEDATE, m.NICKNAME, c.PNO 
+    FROM COMMENTS c
+    JOIN MEMBER m ON c.MEMBER_ID = m.MEMBER_ID
+</select>
+
+</mapper>

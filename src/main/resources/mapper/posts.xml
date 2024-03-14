@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.PostsDao">
+
+<select id="findAllPostsDetail" resultType="com.example.demo.dto.PostsDto$PostsDetail">
+	    SELECT p.PNO, p.TITLE, m.NAME, p.POSTS_CREATEDATE, p.VIEWS, p.likeCount
+	    FROM Posts p
+	    LEFT JOIN Member m ON p.MEMBER_ID = m.MEMBER_ID
+</select>
+
+
+<select id="findAllRead" resultType="com.example.demo.dto.PostsDto$read">
+SELECT     
+    p.pno,
+    p.TITLE,
+    m.nickname,
+    p.likeCount,
+    p.VIEWS,
+    p.posts_createdate,
+    COUNT(c.pno) AS commentsCount
+FROM
+    Posts p 
+LEFT JOIN
+    Member m ON p.MEMBER_ID = m.MEMBER_ID 
+LEFT JOIN
+    comments c ON p.pno = c.pno 
+GROUP BY
+    p.pno, p.TITLE, m.nickname, p.likeCount, p.VIEWS, p.posts_createdate
+
+
+</select>
+
+
+    
+    
+    
+    
+</mapper>

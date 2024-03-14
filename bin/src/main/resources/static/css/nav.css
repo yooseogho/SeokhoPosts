@@ -1,0 +1,75 @@
+@charset "EUC-KR";
+
+@media screen and (max-width: 800px) {
+    main {
+        font-size: 1em;  /* 텍스트 크기를 줄임 */
+    }
+}
+
+body {
+    overflow-x: hidden;  /* 가로 스크롤 제거 */
+}
+
+#commu-nav {
+    background-color: #f8f9fa;
+    border-radius: 11px;
+    padding: 0px;
+    margin: 5px 298px 5px -24px; /* 우측 마진을 0px로 설정 */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex; 
+    justify-content: flex-start;
+    width: 73%; /* 백분율로 설정 */
+    height: 100px;
+    overflow:hidden;float:left;position:relative;width:73%;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px 0;
+}
+
+
+#commu-nav .board-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#commu-nav .board-title .channel-icon {
+    border-radius: 50%;
+    margin-left: 20px;
+    width: 72px;
+    height: auto;
+    object-fit: cover;
+}
+
+#commu-nav .board-title .right {
+    padding-left: 23px;
+    width: 100%;
+}
+
+#commu-nav .board-title .right .head {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#commu-nav .board-title .right .head a.title {
+    color: #333;
+    font-size: 18px;
+    padding: auto;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+#commu-nav .board-title .right .description {
+    margin-top: 0px;
+    font-size: 11px;
+    color: #666;
+    padding: 0px;
+}
+
