@@ -358,24 +358,33 @@ section form input[type="submit"]:hover, input[type="submit"]:hover {
 
 
 
-			<form id="commentForm" class="reply-form">
-					<div class="reply-form__container">
-						<div class="reply-form__user-info">
-							<span class="reply-form-title">댓글 작성</span> <input
-								class="reply-form-user-input" type="text" disabled="disabled"
-								value="이리이리이리">
-						</div>
-						<div class="reply-form-textarea-wrapper">
-							<textarea class="reply-form-textarea" id="commentsContent"
-								name="commentsContent" rows="4"></textarea>
-							<div class="form-footer">
-								<button id="submitComment" type="button">작성</button>
+		<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+// 세션에서 로그인 상태 확인
+boolean isLoggedIn = (session != null && session.getAttribute("loginUser") != null);
+%>
 
-							</div>
-							  <input type="hidden" id="pno" value="${post.pno}" />  <!-- 'pno' 값 저장 -->
-						</div>
-					</div>
-				</form>
+<form id="commentForm" class="reply-form">
+    <div class="reply-form__container">
+        <div class="reply-form__user-info">
+            <span class="reply-form-title">댓글 작성</span> <input
+                class="reply-form-user-input" type="text" disabled="disabled"
+                value="이리이리이리">
+        </div>
+        <div class="reply-form-textarea-wrapper">
+            <textarea class="reply-form-textarea" id="commentsContent"
+                name="commentsContent" rows="4">
+            </textarea>
+            <input type="hidden" id="isLoggedIn" value="<%= isLoggedIn ? "true" : "false" %>" /> <!-- 로그인 상태 표시, 서버에서 설정 -->
+            
+            <div class="form-footer">
+                <button id="submitComment" type="button">작성</button>
+                
+            </div>
+              <input type="hidden" id="pno" value="${post.pno}" />  <!-- 'pno' 값 저장 -->
+        </div>
+    </div>
+</form>
 
 
 

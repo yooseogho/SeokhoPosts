@@ -183,7 +183,7 @@ public class MemberController {
 	
 	
 
-
+	// 로그인 컨트롤러
 	@PostMapping("/login_page")
 	public ModelAndView postLogin(String memberId, String password, HttpSession session) {
 	    Long rno = memberService.login(memberId, password);

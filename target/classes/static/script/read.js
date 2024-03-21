@@ -58,6 +58,8 @@ function loadComments(callback) {
 	});
 }
 
+
+
 // 댓글 작성 함수
 function createComment(e) {
     e.preventDefault();
@@ -110,11 +112,25 @@ $(document).on("keypress", "#commentsContent", function(e) {
 		createComment(e);
 	}
 });
+
 // 작성 버튼 눌렀을때
 $(document).on("click", "#submitComment", function(e) {
 	e.preventDefault();
 	console.log("작성 버튼 클릭!");  // 로그 출력
 	createComment(e);
+});
+
+	// 댓글 로그인을 한 사용자만 댓글 작성할 수 있는 이벤트
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'commentsContent') {
+            var isLoggedIn = document.getElementById('isLoggedIn');
+            // isLoggedIn 필드가 존재하지 않거나 값이 "false"인 경우에만 알림창을 띄웁
+            if (!isLoggedIn || isLoggedIn.value === "false") {
+                alert('로그인이 필요합니다.');
+            }
+        }
+    });
 });
 
 

@@ -58,7 +58,6 @@ public class PostsController {
 
 	
 	
-	@Secured("ROLE_USER")
 	@GetMapping("read_page")
 	public ModelAndView read_page(@RequestParam("pno") Long pno, ModelAndView mav) {
 	    PostsDto.read postDetail = postsService.getPostDetail(pno);
