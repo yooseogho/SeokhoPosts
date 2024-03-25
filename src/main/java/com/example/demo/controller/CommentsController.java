@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dao.CommentsDao;
 import com.example.demo.dto.CommentsDto;
 import com.example.demo.entity.Comments;
-import com.example.demo.servide.CommentsService;
-import com.example.demo.servide.MemberService;
+import com.example.demo.service.CommentsService;
+import com.example.demo.service.MemberService;
 @RestController
 public class CommentsController {
     

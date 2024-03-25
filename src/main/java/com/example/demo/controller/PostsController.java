@@ -20,8 +20,8 @@ import com.example.demo.dto.PostsDto;
 import com.example.demo.dto.PostsDto.PostsDetail;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.Posts;
-import com.example.demo.servide.CommentsService;
-import com.example.demo.servide.PostsService;
+import com.example.demo.service.CommentsService;
+import com.example.demo.service.PostsService;
 
 @Controller
 public class PostsController {

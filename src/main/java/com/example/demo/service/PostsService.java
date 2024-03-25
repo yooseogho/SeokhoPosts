@@ -1,4 +1,4 @@
-package com.example.demo.servide;
+package com.example.demo.service;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -131,6 +131,8 @@ public class PostsService {
     public List<Posts> getLatestPosts() {
         return postsDao.findTop5ByOrderByCreatedDateDesc();
     }
+
+    
 
 
 

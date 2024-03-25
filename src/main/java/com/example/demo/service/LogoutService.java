@@ -1,4 +1,4 @@
-package com.example.demo.servide;
+package com.example.demo.service;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

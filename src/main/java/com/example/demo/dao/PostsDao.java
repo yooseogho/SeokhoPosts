@@ -52,11 +52,11 @@ public interface PostsDao {
     public void increaseLikeCount(Long pno);
     
     // 루트페이지 게시글 정보
-    List<PostsDetail> findAllPostsDetail();
+    public List<PostsDetail> findAllPostsDetail();
     
 
     // 개사글 읽기
-    List<read> findAllRead();
+    public List<read> findAllRead();
     
     // 본문 내용
     @Select("SELECT posts_content FROM Posts WHERE pno=#{pno}")
@@ -64,9 +64,15 @@ public interface PostsDao {
     
     // 최신글 정보 5게 가져오는 쿼리
     @Select("SELECT * FROM (SELECT * FROM Posts ORDER BY posts_createdate DESC) WHERE ROWNUM <= 5")
-    List<Posts> findTop5ByOrderByCreatedDateDesc();
+    public List<Posts> findTop5ByOrderByCreatedDateDesc();
     
+    // 페이징 쿼리
+    @Select("SELECT * FROM (SELECT p.*, rownum AS rnum FROM (SELECT * FROM Posts ORDER BY pno DESC) p) WHERE rnum BETWEEN #{start} AND #{end}")
+    public List<PostsDetail> findPostsDetailByPage(@Param("start") int start, @Param("end") int end);
  
+    @Select("SELECT COUNT(*) FROM Posts")
+    int countPosts();
+    
     
 }
 

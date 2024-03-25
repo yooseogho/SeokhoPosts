@@ -438,16 +438,17 @@ section {
 					<li>추천</li>
 				</ul>
 
-<c:forEach var="post" items="${posts}">
+<c:forEach var="post" items="${pagedPosts}">
     <ul class="board-post">
         <li>${post.pno}</li>
-    	 <a href="read_page?pno=${post.pno}">${post.title}</a>
+        <a href="read_page?pno=${post.pno}">${post.title}</a>
         <li>${post.name}</li>
         <li>${post.postsCreatedate}</li>
         <li>${post.views}</li>
         <li>${post.likeCount}</li>
     </ul>
 </c:forEach>
+
 			
 
 				
@@ -508,38 +509,37 @@ section {
 				</div>
 			</form>
 
-			<div>
-				<ul class="pagination justify-content-center">
-					<a href="/b/bser?p=11"> <img src="/images/prev.svg"
-						alt="Prev_page" style="width: 11px; height: 98%;">
-					</a>
-					  
-					<li class="page-item active"><a class="page-link"
-						href="/b/bser?p=1">1</a></li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=2">2</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=3">3</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=4">4</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=5">5</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=6">6</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=7">7</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=8">8</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=9">9</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="/b/bser?p=10">10</a>
-					</li>
+<div>
+<!--   페이징 처리 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전 페이지 그룹 링크 -->
+        <c:if test="${pagingInfo.hasPreviousGroup}">
+            <li class="page-item">
+                <a class="page-link" href="?p=${pagingInfo.startPage - 1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">이전</span>
+                </a>
+            </li>
+        </c:if>
 
-					<a href="/b/bser?p=11"> <img src="/upload/next.svg"
-						alt="Next_page" style="width: 11px; height: 98%;">
-					</a>
-				</ul>
-			</div>
+        <!-- 페이지 번호들 -->
+        <c:forEach var="pageNum" begin="${pagingInfo.startPage}" end="${pagingInfo.endPage}">
+            <li class="${pageNum == page ? 'page-item active' : 'page-item'}">
+                <a class="page-link" href="?page=${pageNum}">${pageNum}</a>
+            </li>
+        </c:forEach>
+
+        <!-- 다음 페이지 그룹 링크 -->
+        <c:if test="${pagingInfo.hasNextGroup}">
+            <li class="page-item">
+                <a class="page-link" href="?p=${pagingInfo.endPage + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">다음</span>
+                </a>
+            </li>
+        </c:if>
+    </ul>
+</div>
 		</main>
 		
 		
