@@ -15,5 +15,6 @@ public class PagingInfo {
     private boolean hasNextGroup;
     private boolean hasPreviousGroup;
     private int totalPages;
+    private Long categoryId; // categoryId 속성 추가
 
 }

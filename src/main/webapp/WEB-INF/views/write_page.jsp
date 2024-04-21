@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +53,10 @@ main {
 	margin: 4px 4px;
 	height: 1542px;
 	width: 47%;
+}
+
+.image-type {
+	display: none;
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡnav글쓰기 메뉴에 맞게 수정ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -238,6 +242,9 @@ input[type="radio"]+label:hover {
 
 
 	<header>
+		<a href="/"> <img class="channel-logo" src="/images/logo.png"
+				alt="채널 로고">
+			</a>
 		<div>
 			<%
 			if (session.getAttribute("loginUser") == null) {
@@ -259,72 +266,65 @@ input[type="radio"]+label:hover {
 
 	<nav id="commu-nav">
 		<div class="board-title">
-			<a href="/"> <img class="channel-icon" src="/images/RIDA.jpg"
+			<a href="/"> <img class="channel-icon" src="/images/고양이1.jpg"
 				alt="채널 아이콘">
 			</a>
 			<div class="right">
 				<div class="head">
-					<a href="/" class="title" data-channel-name="이터널 리턴 채널"> <span
-						title="이터널 리턴 채널">이터널 리턴 채널 </span>
+					<a href="/" class="title" data-channel-name=""> <span title="">SEOKHO채널
+					</span>
 					</a><a href="#" class="info-btn" role="button"> <span
 						class="ion-ios-information-outline"></span>
 					</a>
 				</div>
 				<div class="description">
 					<div>
-						<span>구독자 20374명</span> <span class="sep"></span> <span>알림수신
-							204명</span> <span class="sep"></span> <span class="user-info"> <a
-							href="/u/@%EC%8B%9C%EB%A7%88%EB%A6%B0">@시마린</a> <span
-							class="ion-checkmark-circled user-icon user-manager" title="매니저"></span>
+						<span>안녕하세요 |</span> <span class="sep"></span> <span> |</span> <span
+							class="sep"></span> <span class="user-info"> <a href="">@유석호</a>
+							<span class="ion-checkmark-circled user-icon user-manager"
+							title="매니저"></span>
 						</span>
 					</div>
-					<div>2023 특.별.한 홀리데이 트리스마스 이벤트 진행 중 !</div>
+					<div>2024 고양이 커뮤니티 !</div>
 				</div>
 			</div>
 		</div>
 	</nav>
 
 
-<div class="container">
-    <div class="content-container">
-        <aside id="left_asid">
-            <div class="prod_list list_v">
-                <ul style="margin-top: 0px; height: 752px;"></ul>
-            </div>
-        </aside>
-        
-		<main style="text-align: center;">
-			<div class="write-head">글쓰기</div>
 
-			<div class="sub-row">
-				<span>글머리</span> <span> <input type="radio" name="category"
-					id="category-general" value="" checked="" required=""> <label
-					for="category-general">일반</label>
-				</span> <span> <input type="radio" name="category" id="category-공지"
-					value="공지"> <label for="category-공지">공지</label>
-				</span> <span> <input type="radio" name="category" id="category-공략"
-					value="공략"> <label for="category-공략">공략</label>
-				</span> <span> <input type="radio" name="category" id="category-정보"
-					value="정보"> <label for="category-정보">정보</label>
-				</span> <span> <input type="radio" name="category" id="category-늒네"
-					value="늒네"> <label for="category-늒네">질문</label>
-				</span> <span> <input type="radio" name="category" id="category-창작"
-					value="창작"> <label for="category-창작">🎨창작</label>
-				</span> <span> <input type="radio" name="category" id="category-짤"
-					value="짤"> <label for="category-짤">그림/만화</label>
-				</span>
+	<div class="container">
+		<div class="content-container">
+			<aside id="left_asid">
+				<div class="prod_list list_v">
+					<ul style="margin-top: 0px; height: 752px;"></ul>
+				</div>
+			</aside>
 
-
-
-
-
-
-
-
-
+			<main style="text-align: center;">
+				<div class="write-head">글쓰기</div>
+				
+	<form id="uploadForm" action="/writePost" method="post"enctype="multipart/form-data">
+				<div class="sub-row">
+					<span>글머리</span> <span> <input type="radio" name="category"
+						id="category-general" value="1" checked="" required=""> <label
+						for="category-general">일반</label>
+						
+					</span> <input type="radio" name="category" id="category-공지" value="2">
+					<label for="category-공지">공지</label> <span> 
+					
+					<input type="radio" name="category" id="category-정보" value="3">
+							<label for="category-정보">정보</label>
+					
+					</span> <span> <input type="radio" name="category" id="category-질문"
+						value="4"> <label for="category-질문">질문</label>
+					</span> <span> <input type="radio" name="category" id="category-사진"
+						value="5"> <label for="category-사진">사진</label>
+					</span>
+				</div>
 				<section>
-					<form id="uploadForm" action="/writePost" method="post"
-						enctype="multipart/form-data">
+				
+						
 						<div class="row">
 							<div class="form-group col-12">
 								<div class="input-group input-group-sm">
@@ -354,7 +354,7 @@ input[type="radio"]+label:hover {
 						</script>
 
 
-						<input type="file" name="file">
+						<input class="image-type" type="file" name="file">
 
 
 						<div class="btns">
@@ -363,98 +363,100 @@ input[type="radio"]+label:hover {
 						<input type="hidden" name="postsContent" id="postsContent">
 					</form>
 				</section>
-		</main>
+			</main>
 
-		</main>
-	    <aside class="sidebar right-sidebar">
-	<div class="sidebar-item">
-		<div class="item-title">
-			<a>최신글</a>
+			</main>
+			<aside class="sidebar right-sidebar">
+				<div class="sidebar-item">
+					<div class="item-title">
+						<a>최신글</a>
+					</div>
+					<div class="link-list" id="latest-posts"></div>
+				</div>
+
+				<script
+					src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+				<script>
+					$(document).ready(function() {
+						updateLatestPosts();
+
+						// 최신글 정보 가져오기
+						setInterval(updateLatestPosts, 60000); // 60000 밀리초(1분)마다 실행
+					});
+
+					function updateLatestPosts() {
+						$
+								.ajax({
+									url : "/api/latest-posts", // 최신 게시글 정보를 가져올 API URL
+									type : "GET",
+									success : function(data) {
+										console.log(data);
+										var linkList = $('#latest-posts');
+										linkList.empty(); // 기존 게시글 목록을 삭제
+										// 새로운 게시글 목록을 생성
+										data
+												.forEach(function(post) {
+													var postLink = $('<a>')
+															.attr(
+																	'href',
+																	'read_page?pno='
+																			+ post.pno)
+															.text(post.title);
+
+													if (post.postsCreatedate) {
+														var postTime = $(
+																'<span>')
+																.addClass(
+																		'leaf-info float-right')
+																.append(
+																		$(
+																				'<time>')
+																				.attr(
+																						'datetime',
+																						post.postsCreatedate)
+																				.attr(
+																						'data-format',
+																						'm-d')
+																				.text(
+																						post.postsCreatedate));
+														postLink
+																.append(postTime);
+													}
+
+													linkList.append(postLink);
+												});
+									},
+
+									error : function(error) {
+										console.log("Error: ", error);
+									}
+								});
+					}
+				</script>
+
+
+
+
+			</aside>
 		</div>
-	<div class="link-list" id="latest-posts">
-</div>
-	</div>
-	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script>
-$(document).ready(function() {
-    updateLatestPosts();
 
-    // 최신글 정보 가져오기
-    setInterval(updateLatestPosts, 60000);  // 60000 밀리초(1분)마다 실행
-});
-
-function updateLatestPosts() {
-    $.ajax({
-        url: "/api/latest-posts",  // 최신 게시글 정보를 가져올 API URL
-        type: "GET",
-        success: function(data) {
-            console.log(data);  
-            var linkList = $('#latest-posts');  
-            linkList.empty();  // 기존 게시글 목록을 삭제
-            // 새로운 게시글 목록을 생성
-            data.forEach(function(post) {
-            	var postLink = $('<a>').attr('href', 'read_page?pno=' + post.pno).text(post.title);
-
-                if (post.postsCreatedate) {
-                    var postTime = $('<span>').addClass('leaf-info float-right')
-                                              .append($('<time>').attr('datetime', post.postsCreatedate)
-                                                                 .attr('data-format', 'm-d')
-                                                                 .text(post.postsCreatedate));
-                 												   postLink.append(postTime);  
-                }
-
-	                linkList.append(postLink);
-            });
-        },
-        
-        error: function(error) {
-            console.log("Error: ", error);
-        }
-    });
-}
-</script>
-
-
-<div class="sidebar-item" id="newsRank">
-    <div class="item-title">뉴스</div>
-    <div class="link-list">
-        <c:forEach var="news" items="${newsData}">
-            <c:choose>
-                <c:when test="${fn:length(news.title) > 10}">
-                    <a href="${news.link}" title="${news.title}" target="_blank">${fn:substring(news.title, 0, 18)}...</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${news.link}" title="${news.title}" target="_blank">${news.title}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-    </div>
-    <div class="sidebar-by"></div>
-</div>
-
-
-
-	</aside>
-</div>
-
-	<footer class="footer">
-		<p>
-			Live v2&nbsp;<small class="text-muted">(7b489a59)</small><span
-				class="sep"></span><a href="mailto:support@arca.live">Contáctenos</a><span
-				class="sep"></span><a href="mailto:arcalive@safefra.me">Ads</a><span
-				class="sep"></span><a href="/policy">POLÍTICA DE PRIVACIDAD Y
-				REGLAS DE USO</a>
-		</p>
-		<p>
-			Operado por umanle S.R.L.<span class="sep"></span>Hecho con &lt;3 en
-			Asunción, República del Paraguay
-		</p>
-		<p class="footer-current-users">
-			<span class="ion-ios-people"></span>&nbsp;<span
-				id="arcalive-current-users">41913</span>명
-		</p>
-	</footer>
+		<footer class="footer">
+			<p>
+				Live v2&nbsp;<small class="text-muted">(7b489a59)</small><span
+					class="sep"></span><a href="mailto:support@arca.live">Contáctenos</a><span
+					class="sep"></span><a href="mailto:arcalive@safefra.me">Ads</a><span
+					class="sep"></span><a href="/policy">POLÍTICA DE PRIVACIDAD Y
+					REGLAS DE USO</a>
+			</p>
+			<p>
+				Operado por umanle S.R.L.<span class="sep"></span>Hecho con &lt;3 en
+				Asunción, República del Paraguay
+			</p>
+			<p class="footer-current-users">
+				<span class="ion-ios-people"></span>&nbsp;<span
+					id="arcalive-current-users">41913</span>명
+			</p>
+		</footer>
 </body>
 
 </html>

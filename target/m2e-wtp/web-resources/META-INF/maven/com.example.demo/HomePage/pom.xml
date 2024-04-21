@@ -102,22 +102,26 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
 		<!--  JSON 데이터 처리 의존성  -->
 		<dependency>
 			<groupId>net.minidev</groupId>
 			<artifactId>accessors-smart</artifactId>
 			<version>2.4.11</version>
 		</dependency>
+		
 		<!--  YAML 사용 의존성  -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
 		</dependency>
+		
 		<!--  스프링 시큐리티 EL과 태그 라이브러리  -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
+		
 		<!--  아파치 커먼스 라이브러리 : lang3, io  -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -128,16 +132,19 @@
 			log4jdbc와 log4j2를 연결해 메시지를 출력하는 라이브러리
 			우리는 logback을 사용하지만 logback이나 log4j2나 slf4j의 구현체이므로 상관없음(facade 패턴)
 		 -->
+		 
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
+		
 		<!--  JSTL  -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+		
 		<!--  내장 톰캣에 jsp 지원 기능을 추가  -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>

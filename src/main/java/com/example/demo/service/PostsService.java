@@ -20,6 +20,8 @@ import com.example.demo.dto.PostsDto.read;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.Posts;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Service
 public class PostsService {
 	
@@ -67,13 +69,13 @@ public class PostsService {
 	    }
 
 	    // 저장된 파일의 URL을 반환합니다.
-	    String fileUri = "http://localhost:8081/upload/" + fileName;
+	    String fileUri = "http://localhost:8082/upload/" + fileName;
 
 	    return fileUri;
 	}
 	
 	
-	
+	// 홈 화면 글 목록 
 	public List<PostsDetail> getAllPostsDetail() {
 	    List<PostsDetail> postsDetailList = postsDao.findAllPostsDetail();
 	    System.out.println("리스트 내용: " + postsDetailList);
@@ -92,15 +94,18 @@ public class PostsService {
 	
 	
 	// 글쓰기
-	public Long savePost(Posts posts) {
+	public Long savePost(Posts posts, Long category) {
 	    if(posts == null) {
 	        throw new IllegalArgumentException("Posts object is null");
 	    }
 	    posts.setLikeCount(0L); // 좋아요 수를 0으로 초기화
 	    LocalDate now = LocalDate.now();  // 현재 날짜를 가져옵니다.
 	    posts.setPostsCreatedate(now); // 현재 날짜 설정
-	    return  (long) postsDao.save(posts);
+	    posts.setCano(category); // 사용자가 선택한 카테고리 설정
+	    
+	    return (long) postsDao.save(posts);
 	}
+
 
 	
 	
@@ -131,7 +136,18 @@ public class PostsService {
     public List<Posts> getLatestPosts() {
         return postsDao.findTop5ByOrderByCreatedDateDesc();
     }
+    
+    // 카테고리 번호
+    public List<Posts> getPostsByCategory(Long category) {
+        return postsDao.findPostsByCategory(category);
+    }
+    
 
+    // 모든게시글 정보
+    
+    public List<Posts> getAllPosts(){
+    return postsDao.getAllPosts();
+    }
     
 
 

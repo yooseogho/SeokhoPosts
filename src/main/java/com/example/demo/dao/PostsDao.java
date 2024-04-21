@@ -14,11 +14,12 @@ import com.example.demo.dto.PostsDto.PostsDetail;
 import com.example.demo.dto.PostsDto.read;
 import com.example.demo.entity.Posts;
 
+
 @Mapper
 public interface PostsDao {
 
-	@Insert("INSERT INTO Posts(pno, title, posts_content, posts_createdate, posts_modified, member_id,views,likeCount) " +
-	        "VALUES ( posts_seq.nextval, #{title}, #{postsContent}, SYSDATE, SYSDATE, #{memberId},0,0)")
+	@Insert("INSERT INTO Posts(pno, title, posts_content, posts_createdate, posts_modified, member_id,views,likeCount,cano) " +
+	        "VALUES ( posts_seq.nextval, #{title}, #{postsContent}, SYSDATE, SYSDATE, #{memberId},0,0,#{cano})")
 	@SelectKey(statement = "SELECT posts_seq.currval FROM dual", keyProperty = "pno", before = false, resultType = Long.class)
 	public Long save(Posts posts);
 
@@ -54,7 +55,9 @@ public interface PostsDao {
     // 루트페이지 게시글 정보
     public List<PostsDetail> findAllPostsDetail();
     
-
+    // 모든 게시글의 수를 반환하는 메서드
+    @Select("SELECT COUNT(*) FROM Posts")
+    Long countAllPosts();
     // 개사글 읽기
     public List<read> findAllRead();
     
@@ -71,7 +74,24 @@ public interface PostsDao {
     public List<PostsDetail> findPostsDetailByPage(@Param("start") int start, @Param("end") int end);
  
     @Select("SELECT COUNT(*) FROM Posts")
-    int countPosts();
+    public int countPosts();
+    
+    
+    // 카테고리 ID에 따른 게시글을 필터링하는 메서드
+    @Select("SELECT * FROM posts WHERE cano = #{cano}")
+    public List<Posts> findPostsByCategory(Long category);
+    
+    
+ // 카테고리 ID에 따른 게시글 상세 정보 조회
+    @Select("SELECT p.*, c.CATEGORY_NAME AS categoryName, m.nickname FROM Posts p JOIN category c ON p.cano = c.cano JOIN member m ON p.member_id = m.member_id WHERE p.cano = #{cano} ORDER BY p.pno DESC")
+    public List<PostsDetail> findPostsDetailByCategory(@Param("cano") Long cano);
+
+    @Select("SELECT COUNT(*) FROM Posts WHERE cano = #{cano}")
+    public Long countPostsByCategory(@Param("cano") Long cano);
+
+    @Select("SELECT * FROM posts WHERE cano = #{cano} LIMIT #{offset}, #{pageSize}")
+    public List<Posts> findPostsByCategoryAndPage(Long category, int offset, int pageSize);
+
     
     
 }

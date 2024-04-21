@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +11,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+
 <title>게시판</title>
 <link rel="stylesheet" type="text/css" href="CSS/index.css">
 <link rel="stylesheet" type="text/css" href="CSS/header.css">
@@ -23,7 +27,76 @@
 
 
 <style>
+
+.page-post {
+    display: flex; /* Flexbox를 사용함 */
+    justify-content: center; /* 가로축에서 중앙 정렬 */
+    list-style: none; /* 기본 리스트 스타일 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    gap: 10px; /* 항목 사이의 간격 추가 */
+    	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	/* 밑줄 색상을 검정색의 50% 투명도로 설정 */
+	padding-bottom: 10px;
+	/* 밑줄과 게시글 사이의 간격 설정 *
+}
+
+        .page-item {
+            margin-right: 5px; /* 요소들 사이에 간격 추가 */
+        }
+a {
+  color: #000; 
+  text-decoration: none;
+}
+
 /* 전체 레이아웃 설정 */
+#board-header, .board-post {
+	list-style-type: none;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr 3fr 2fr 2fr 1fr 1fr;
+	/* 각 컬럼의 비율 설정 */
+	gap: 1em;
+	/* 각 항목 사이의 간격 설정 */
+	background-color: #f2f4f7;
+	padding: 2px;
+	
+}
+.board-post {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	/* 밑줄 색상을 검정색의 50% 투명도로 설정 */
+	padding-bottom: 20px;
+	/* 밑줄과 게시글 사이의 간격 설정 */
+}
+
+#menuList {
+	display: flex;
+	list-style-type: none;
+	justify-content: space-around;
+	/* 메뉴 항목들 사이에 공간을 동일하게 배분 */
+	padding: 0;
+	/* 패딩 제거 */
+	min-width: 582px;
+}
+
+#menuList li a {
+	color: black;
+	text-decoration: none;
+	/* 링크 밑줄 제거 */
+}
+
+#menuList li a:hover {
+	color: blue;
+	/* 마우스를 가져다 대었을 때의 텍스트 색상 */
+	font-weight: bold;
+	/* 마우스를 가져다 대었을 때의 텍스트 굵기 */
+}
+
+#menuList li {
+	display: inline-block;
+	/* 리스트 항목을 인라인 블록으로 설정 */
+	margin-right: 10px;
+	/* 항목 사이의 간격 조정 */
+}
 main {
 	min-width: 939px;
 	background-color: aliceblue;
@@ -249,6 +322,9 @@ section form input[type="submit"]:hover, input[type="submit"]:hover {
 
 
 	<header>
+		<a href="/"> <img class="channel-logo" src="/images/logo.png"
+				alt="채널 로고">
+			</a>
 		<div>
 			<%
 			if (session.getAttribute("loginUser") == null) {
@@ -269,33 +345,33 @@ section form input[type="submit"]:hover, input[type="submit"]:hover {
 
 
 
-
 	<nav id="commu-nav">
 		<div class="board-title">
-			<a href="/"> <img class="channel-icon" src="/upload/RIDA.jpg"
+			<a href="/"> <img class="channel-icon" src="/images/고양이1.jpg"
 				alt="채널 아이콘">
 			</a>
 			<div class="right">
 				<div class="head">
-					<a href="/" class="title" data-channel-name="이터널 리턴 채널"> <span
-						title="이터널 리턴 채널">이터널 리턴 채널 </span>
+					<a href="/" class="title" data-channel-name=""> <span
+						title="">SEOKHO채널 </span>
 					</a><a href="#" class="info-btn" role="button"> <span
 						class="ion-ios-information-outline"></span>
 					</a>
 				</div>
 				<div class="description">
 					<div>
-						<span>구독자 20374명</span> <span class="sep"></span> <span>알림수신
-							204명</span> <span class="sep"></span> <span class="user-info"> <a
-							href="/u/@%EC%8B%9C%EB%A7%88%EB%A6%B0">@시마린</a> <span
+						<span>안녕하세요 |</span> <span class="sep"></span> <span>
+							 |</span> <span class="sep"></span> <span class="user-info">
+							<a href="">@유석호</a> <span
 							class="ion-checkmark-circled user-icon user-manager" title="매니저"></span>
 						</span>
 					</div>
-					<div>2023 특.별.한 홀리데이 트리스마스 이벤트 진행 중 !</div>
+					<div>2024 고양이 커뮤니티 !</div>
 				</div>
 			</div>
 		</div>
 	</nav>
+
 
 <div class="container">
     <div class="content-container">
@@ -322,22 +398,28 @@ section form input[type="submit"]:hover, input[type="submit"]:hover {
 				<p>${post.postsContent}</p>
 			</div>
 
-<div class="botMenuCenter">
-    <div class="bttnRecom onlyRecom">
-        <a class="bttnRecommend"
-            href="javascript:alert('로그인 하셔야 추천할 수 있습니다');" title="추천하기"> 
-            <img src="/images/thumbs-up-regular.svg" alt="추천 이모티콘" width="35" height="35"> 
-            <span class="reqnum reqblue"><span id="recomresult_173">
-        </a>
+<form id="likeForm">
+    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    <input type="hidden" name="pno" value="${pno}" /> <!-- 게시글 번호 -->
+    <div class="botMenuCenter">
+        <div class="bttnRecom onlyRecom">
+            <button type="submit" class="bttnRecommend" title="추천하기">
+                <img src="/images/thumbs-up-regular.svg" alt="추천 이모티콘" width="35" height="35">
+                <span class="reqnum reqblue"></span>
+            </button>
+        </div>
     </div>
-			</div>
+</form>
+
+			
+			
 			<hr>
 			<div class="write-box">
 				<span>댓글목록</span>
 				<div class="float-right">
 					<div class="box">
 						<a class="btn btn-sm btn-arca btn-arca-article-write"
-							href="/write_page" title="글쓰기"> <img src="/upload/pen-to.svg">
+							href="/write_page" title="글쓰기"> <img src="/images/pen-to.svg">
 							<span class="ion-compose"> </span> 글쓰기
 						</a>
 					</div>
@@ -369,7 +451,7 @@ boolean isLoggedIn = (session != null && session.getAttribute("loginUser") != nu
         <div class="reply-form__user-info">
             <span class="reply-form-title">댓글 작성</span> <input
                 class="reply-form-user-input" type="text" disabled="disabled"
-                value="이리이리이리">
+                value="${post.nickname }">
         </div>
         <div class="reply-form-textarea-wrapper">
             <textarea class="reply-form-textarea" id="commentsContent"
@@ -391,15 +473,89 @@ boolean isLoggedIn = (session != null && session.getAttribute("loginUser") != nu
 
 
 			</div>
+			<hr>
+			
+			
+	<img src="//img.mobon.net/servlet/image/mobon/728x90.png">
+			<!-- 리스트 추가 시작 -->
+	<ul id="menuList">
+    <li class="active-menu" data-category-id="all"><a href="#" onclick="return false;">전체</a></li>
+    <li data-category-id="1"><a href="#" onclick="return false;">일반</a></li>
+    <li data-category-id="2"><a href="#" onclick="return false;">공지</a></li>
+    <li data-category-id="3"><a href="#" onclick="return false;">정보</a></li>
+    <li data-category-id="4"><a href="#" onclick="return false;">질문</a></li>
+    <li data-category-id="5"><a href="#" onclick="return false;">사진</a></li>
+</ul>
 
-		</main>
+				<!-- 리스트 추가 끝 -->
+
+				<ul id="board-header">
+				
+					<li>번호</li>
+					<li>제목</li>
+					<li>작성자</li>
+					<li>작성일</li>
+					<li>조회수</li>
+					<li>추천</li>
+				</ul>
+<c:forEach var="post" items="${pagedPostsList}">
+    <li class="board-post" data-category-id="${post.cano}">
+        <div >${post.pno}</div>
+        <a href="read_page?pno=${post.pno}">${post.title}</a>
+        <div>${post.nickname}</div>
+        <div>${post.postsCreatedate}</div>
+        <div>${post.views}</div>
+        <div>${post.likeCount}</div>
+    </li>
+</c:forEach>
+
+
+<div id="postsContainer" >
+</div>
+
+
+
+
+<ul class="page-post">
+    <!-- 이전 페이지 그룹 링크 -->
+<!-- 이전 페이지 그룹 링크, activeCategory 변수에 현재 카테고리 ID를 설정해야 함 -->
+<c:if test="${pagingInfo.hasPreviousGroup}">
+    <li class="page-item">
+        <a class="page-link" href="?category=${activeCategory}&page=${pagingInfo.startPage - 1}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">이전</span>
+        </a>
+    </li>
+</c:if>
+
+<!-- 페이지 번호들 -->
+<c:forEach var="pageNum" begin="${pagingInfo.startPage}" end="${pagingInfo.endPage}">
+    <li class="${pageNum == page ? 'page-item active' : 'page-item'}">
+        <a class="page-link" href="?category=${activeCategory}&page=${pageNum}">${pageNum}</a>
+    </li>
+</c:forEach>
+
+<!-- 다음 페이지 그룹 링크 -->
+<c:if test="${pagingInfo.hasNextGroup}">
+    <li class="page-item">
+        <a class="page-link" href="?category=${activeCategory}&page=${pagingInfo.endPage + 1}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">다음</span>
+        </a>
+    </li>
+</c:if>
+
+
+</ul>
+
+	
+			</main>
 
 
 
 
 
-
-      <aside class="sidebar right-sidebar">
+         <aside class="sidebar right-sidebar">
 	<div class="sidebar-item">
 		<div class="item-title">
 			<a>최신글</a>

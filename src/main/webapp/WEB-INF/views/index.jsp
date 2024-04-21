@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>	
 
 
 <link rel="stylesheet" type="text/css"
@@ -21,10 +22,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>게시판</title>
-<head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/script/category.js"></script>
 <link rel="stylesheet" type="text/css" href="CSS/index.css">
 <link rel="stylesheet" type="text/css" href="CSS/header.css">
 <link rel="stylesheet" type="text/css" href="CSS/nav.css">
@@ -34,15 +34,7 @@
 
 
 <script>
-	$(document).ready(function() {
-		$('#menuList li').on('click', function() {
-			$('#menuList li').removeClass('active-menu'); /* 모든 메뉴 아이템에서 .active-menu 클래스 제거 */
-			$(this).addClass('active-menu'); /* 사용자가 클릭한 메뉴 아이템에 .active-menu 클래스 추가 */
-		});
-	});
 	
-	
-
 	window.onload = function() {
 		// 쿠키에서 이름을 가져옴
 		var name = getCookie('name');
@@ -75,9 +67,20 @@
 				+ '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 	
-	
+	$(document).ready(function(){
+	    // 메뉴 항목을 클릭했을 때의 이벤트 핸들러
+	    $('#menuList li').click(function() {
+	        // 모든 메뉴 항목에서 'active-menu' 클래스를 제거합니다.
+	        $('#menuList li').removeClass('active-menu');
 
-	
+	        // 클릭된 메뉴 항목에만 'active-menu' 클래스를 추가합니다.
+	        $(this).addClass('active-menu');
+
+	        // 게시글 목록을 숨깁니다.
+	        $('.board-post').hide();
+	    });
+	});
+
 	
 </script>
 <style>
@@ -86,7 +89,7 @@ main {
 	background-color: aliceblue;
 	padding: 2px;
 	margin: 1px 5px;
-	height: 1554px;
+	height: 850px;
 	min-height:100%;
 	width: 50%;
 	margin-left: 3px;
@@ -343,6 +346,10 @@ section {
 	/* 활성화된 아이템의 글자색 설정 */
 }
 
+    .channel-logo {
+        width: 400px; /* 원하는 너비로 설정 */
+        height: auto; /* 높이를 자동으로 조절하여 비율 유지 */
+    }
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 </style>
 </head>
@@ -350,6 +357,9 @@ section {
 <body>
 
 	<header>
+		<a href="/"> <img class="channel-logo" src="/images/logo.png"
+				alt="채널 로고">
+			</a>
 		<div>
 			<%
 			if (session.getAttribute("loginUser") == null) {
@@ -402,7 +412,7 @@ section {
     <div class="content-container">
         <aside id="left_asid">
             <div class="prod_list list_v">
-                <ul style="margin-top: 0px; height: 752px;"></ul>
+                
             </div>
         </aside>
 		
@@ -411,22 +421,17 @@ section {
 		<main style="text-align: center;">
 		
 			<section>
-	<img class="responsive-image" src="/images/nav바.jpg" style="width: 200px;">
+<img src="//img.mobon.net/servlet/image/mobon/728x90.png">
 
-				<!-- 리스트 추가 시작 -->
-				<ul id="menuList">
-					<li class="active-menu"><a href="#">전체</a></li>
-					<li><a href="#">일반</a></li>
-					<li><a href="#">공지</a></li>
-					<li><a href="#">공략</a></li>
-					<li><a href="#">정보</a></li>
-					<li><a href="#">질문</a></li>
-					<li><a href="#">🎨창작</a></li>
-					<li><a href="#">그림/만화</a></li>
-				</ul>
 
-				<!-- 리스트 추가 끝 -->
-
+<ul id="menuList">
+    <li class="active-menu" data-category-id="all"><a href="#" onclick="return false;">전체</a></li>
+    <li data-category-id="1"><a href="#" onclick="return false;">일반</a></li>
+    <li data-category-id="2"><a href="#" onclick="return false;">공지</a></li>
+    <li data-category-id="3"><a href="#" onclick="return false;">정보</a></li>
+    <li data-category-id="4"><a href="#" onclick="return false;">질문</a></li>
+    <li data-category-id="5"><a href="#" onclick="return false;">사진</a></li>
+</ul>
 
 				<ul id="board-header">
 				
@@ -438,20 +443,13 @@ section {
 					<li>추천</li>
 				</ul>
 
-<c:forEach var="post" items="${pagedPosts}">
-    <ul class="board-post">
-        <li>${post.pno}</li>
-        <a href="read_page?pno=${post.pno}">${post.title}</a>
-        <li>${post.name}</li>
-        <li>${post.postsCreatedate}</li>
-        <li>${post.views}</li>
-        <li>${post.likeCount}</li>
-    </ul>
-</c:forEach>
 
-			
 
-				
+
+<div id="postsContainer" >
+</div>
+
+
 
 			</section>
 
@@ -481,7 +479,7 @@ section {
 			<div class="float-right">
 				<div class="box">
 					<a class="btn btn-sm btn-arca btn-arca-article-write"
-						href="/write_page" title="글쓰기"> <img src="/upload/pen-to.svg">
+						href="/write_page" title="글쓰기"> <img src="/images/pen-to.svg">
 						<span class="ion-compose"> </span> 글쓰기
 					</a>
 				</div>
@@ -492,7 +490,6 @@ section {
 				<div class="input-group">
 					<div class="right-aligned-group">
 						<select class="form-control form-control-sm" name="target">
-							<option value="all" selected="">전체</option>
 							<option value="all" selected="">전체</option>
 							<option value="title_content">제목/내용</option>
 							<option value="title">제목</option>
@@ -508,37 +505,39 @@ section {
 					</div>
 				</div>
 			</form>
-
 <div>
-<!--   페이징 처리1111 -->
-    <ul class="pagination justify-content-center">
-        <!-- 이전 페이지 그룹 링크 -->
-        <c:if test="${pagingInfo.hasPreviousGroup}">
-            <li class="page-item">
-                <a class="page-link" href="?p=${pagingInfo.startPage - 1}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">이전</span>
-                </a>
-            </li>
-        </c:if>
 
-        <!-- 페이지 번호들 -->
-        <c:forEach var="pageNum" begin="${pagingInfo.startPage}" end="${pagingInfo.endPage}">
-            <li class="${pageNum == page ? 'page-item active' : 'page-item'}">
-                <a class="page-link" href="?page=${pageNum}">${pageNum}</a>
-            </li>
-        </c:forEach>
 
-        <!-- 다음 페이지 그룹 링크 -->
-        <c:if test="${pagingInfo.hasNextGroup}">
-            <li class="page-item">
-                <a class="page-link" href="?p=${pagingInfo.endPage + 1}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">다음</span>
-                </a>
-            </li>
-        </c:if>
-    </ul>
+	<!--   페이징 처리1111 -->
+	    <ul class="pagination justify-content-center">
+	        <!-- 이전 페이지 그룹 링크 -->
+<!-- 이전 페이지 그룹 링크, activeCategory 변수에 현재 카테고리 ID를 설정해야 함 -->
+<c:if test="${pagingInfo.hasPreviousGroup}">
+    <li class="page-item">
+        <a class="page-link" href="?category=${activeCategory}&page=${pagingInfo.startPage - 1}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">이전</span>
+        </a>
+    </li>
+</c:if>
+
+<!-- 페이지 번호들 -->
+<c:forEach var="pageNum" begin="${pagingInfo.startPage}" end="${pagingInfo.endPage}">
+    <li class="${pageNum == page ? 'page-item active' : 'page-item'}">
+        <a class="page-link" href="?category=${activeCategory}&page=${pageNum}">${pageNum}</a>
+    </li>
+</c:forEach>
+
+<!-- 다음 페이지 그룹 링크 -->
+<c:if test="${pagingInfo.hasNextGroup}">
+    <li class="page-item">
+        <a class="page-link" href="?category=${activeCategory}&page=${pagingInfo.endPage + 1}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">다음</span>
+        </a>
+    </li>
+</c:if>
+	    </ul>
 </div>
 		</main>
 		

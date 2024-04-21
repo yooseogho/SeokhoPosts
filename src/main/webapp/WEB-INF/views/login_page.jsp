@@ -98,52 +98,53 @@ width: 55%;
 <body>
 
 
-<header>
-    <div>
-        <% if(session.getAttribute("loginUser") == null) { %>
-            <a href="login_page">로그인</a>
-            <a href="create_member_page">회원가입</a>
-        <% } else { %>
-            <a href="/logout">로그아웃</a>
-        <% } %>
-    </div>
-</header>
+	<header>
+		<a href="/"> <img class="channel-logo" src="/images/logo.png"
+				alt="채널 로고">
+			</a>
+		<div>
+			<%
+			if (session.getAttribute("loginUser") == null) {
+			%>
+			<a href="login_page">로그인</a> <a href="create_member_page">회원가입</a>
+			<%
+			} else {
+			%>
+			<a href="/logout">로그아웃</a>
+			<%
+			}
+			%>
+		</div>
+	</header>
 
 
 
-
-    <nav id="commu-nav">
-        <div class="board-title">
-            <a href="/">
-                <img class="channel-icon" src="/images/RIDA.jpg" alt="채널 아이콘">
-            </a>
-            <div class="right">
-                <div class="head">
-                    <a href="/" class="title" data-channel-name="이터널 리턴 채널">
-                        <span title="이터널 리턴 채널">이터널 리턴 채널 </span>
-                    </a><a href="#" class="info-btn" role="button">
-                        <span class="ion-ios-information-outline"></span>
-                    </a>
-                </div>
-                <div class="description">
-                    <div>
-                        <span>구독자 20374명</span>
-                        <span class="sep"></span>
-                        <span>알림수신 204명</span>
-                        <span class="sep"></span>
-                        <span class="user-info">
-                            <a href="/u/@%EC%8B%9C%EB%A7%88%EB%A6%B0">@시마린</a>
-                            <span class="ion-checkmark-circled user-icon user-manager" title="매니저"></span>
-                        </span>
-                    </div>
-                    <div>
-                        2023 특.별.한 홀리데이 트리스마스 이벤트 진행 중 !
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-    
+	<nav id="commu-nav">
+		<div class="board-title">
+			<a href="/"> <img class="channel-icon" src="/images/고양이1.jpg"
+				alt="채널 아이콘">
+			</a>
+			<div class="right">
+				<div class="head">
+					<a href="/" class="title" data-channel-name=""> <span
+						title="">SEOKHO채널 </span>
+					</a><a href="#" class="info-btn" role="button"> <span
+						class="ion-ios-information-outline"></span>
+					</a>
+				</div>
+				<div class="description">
+					<div>
+						<span>안녕하세요 |</span> <span class="sep"></span> <span>
+							 |</span> <span class="sep"></span> <span class="user-info">
+							<a href="">@유석호</a> <span
+							class="ion-checkmark-circled user-icon user-manager" title="매니저"></span>
+						</span>
+					</div>
+					<div>2024 고양이 커뮤니티 !</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 
 <div class="container">
     <div class="content-container">

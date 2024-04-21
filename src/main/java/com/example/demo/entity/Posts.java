@@ -21,6 +21,8 @@ public class Posts {
 	private String memberId;  // MEMBER_ID2에 해당하는 필드
 	private Long views; // 조회수
 	private Long likeCount; // 좋아요 수
+	private Long cano; // 케테고리 번호
+	
 
 
 }

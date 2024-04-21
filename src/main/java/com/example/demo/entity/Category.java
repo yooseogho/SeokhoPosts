@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class Category {
 	private Long cano;					// 카테고리 번호
 	private String categoryName;		// 카테고리 이름
-	private Long pno;					// 게시판 글번호
 
 }

@@ -6,7 +6,7 @@
 <mapper namespace="com.example.demo.dao.PostsDao">
 
 <select id="findAllPostsDetail" resultType="com.example.demo.dto.PostsDto$PostsDetail">
-	    SELECT p.PNO, p.TITLE, m.NAME, p.POSTS_CREATEDATE, p.VIEWS, p.likeCount
+	    SELECT p.PNO, p.TITLE, m.nickname, p.POSTS_CREATEDATE, p.VIEWS, p.likeCount,p.cano
 	    FROM Posts p
 	    LEFT JOIN Member m ON p.MEMBER_ID = m.MEMBER_ID
 </select>
